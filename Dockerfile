@@ -1,7 +1,6 @@
-FROM resin/rpi-raspbian
+FROM paperinik/rpi-java8
 
 RUN apt-get update \
-    && apt-get install oracle-java8-jdk -y \
     && apt-get install wget -y \ 
     && wget https://sonatype-download.global.ssl.fastly.net/nexus/3/nexus-3.0.1-01-unix.tar.gz -O /tmp/nexus-3.0.1-01-unix.tar.gz \
     && useradd -r -u 200 -m -c "nexus role account" -d /opt/sonatype-work -s /bin/false nexus \
