@@ -13,7 +13,7 @@ RUN cd /tmp \
     && wget -O /tmp/nexus-${NEXUS_VERSION}-unix.tar.gz https://sonatype-download.global.ssl.fastly.net/nexus/3/nexus-${NEXUS_VERSION}-unix.tar.gz \
     && tar -zxf /tmp/nexus-${NEXUS_VERSION}-unix.tar.gz -C /usr/local \
     && mv /usr/local/nexus-${NEXUS_VERSION}* /usr/local/nexus \
-    && rm -f /tmp/nexus-bundle.tar.gz \
+    && rm -f /tmp/nexus-${NEXUS_VERSION}-unix.tar.gz \
     && useradd -m nexus \
     && chown -R nexus /usr/local/nexus \
     && apt-get purge --auto-remove wget \
