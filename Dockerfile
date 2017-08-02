@@ -1,22 +1,33 @@
-FROM paperinik/rpi-java8
+FROM resin/rpi-raspbian
+MAINTAINER Bruno Cardoso Cantisano <bruno.cantisano@gmail.com>
 
-RUN apt-get update && apt-get install -y wget \
-    && mkdir -p /opt/sonatype/ \
-    && mkdir -p /opt/sonatype-work \
-    && wget https://sonatype-download.global.ssl.fastly.net/nexus/3/nexus-3.0.1-01-unix.tar.gz && tar -xzf /nexus-3.0.1-01-unix.tar.gz && rm /nexus-3.0.1-01-unix.tar.gz \
-    && mv /nexus-3.0.1-01 /opt/sonatype/nexus \
-    && useradd -r -u 200 -m -c "nexus role account" -d /opt/sonatype-work -s /bin/false nexus \
-    && chown -Rv nexus:nexus /opt/sonatype/nexus  \
-    && chown -Rv nexus:nexus /opt/sonatype-work \
+LABEL version latest
+LABEL description Sonatype Nexus Repository Container
+
+ENV NEXUS_VERSION 3.0.1-01
+
+RUN cd /tmp \
+    && apt-get clean \
+    && apt-get update \
+    && apt-get install -y wget oracle-java8-jdk \
+    && wget -O /tmp/nexus-${NEXUS_VERSION}-unix.tar.gz https://sonatype-download.global.ssl.fastly.net/nexus/3/nexus-${NEXUS_VERSION}-unix.tar.gz \
+    && tar -zxf /tmp/nexus-${NEXUS_VERSION}-unix.tar.gz -C /usr/local \
+    && mv /usr/local/nexus-${NEXUS_VERSION}* /usr/local/nexus \
+    && rm -f /tmp/nexus-bundle.tar.gz \
+    && useradd -m nexus \
+    && chown -R nexus /usr/local/nexus \
     && apt-get purge --auto-remove wget \
     && rm -rf /var/lib/apt/lists/*
 
+ENV JAVA_HOME /usr/lib/jvm/jdk-8-oracle-arm32-vfp-hflt
+COPY nexus.vmoptions /usr/local/nexus/bin/nexus.vmoptions
 
-VOLUME /opt/sonatype-work
+EXPOSE 8081
 
-WORKDIR /opt/sonatype/nexus
+VOLUME /usr/local/nexus/data
 
-COPY nexus.vmoptions /opt/sonatype/nexus/bin/nexus.vmoptions
+WORKDIR /usr/local/nexus/bin
 
 USER nexus
-CMD ["/opt/sonatype/nexus/bin/nexus", "run"]
+
+CMD ["./nexus", "run"]
