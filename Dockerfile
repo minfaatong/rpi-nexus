@@ -20,7 +20,7 @@ RUN cd /tmp \
     && rm -rf /var/lib/apt/lists/*
 
 ENV JAVA_HOME /usr/lib/jvm/jdk-8-oracle-arm32-vfp-hflt
-#COPY nexus.vmoptions /usr/local/nexus/bin/nexus.vmoptions
+COPY nexus.vmoptions /usr/local/nexus/bin/nexus.vmoptions
 
 EXPOSE 8081
 
