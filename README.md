@@ -2,10 +2,10 @@
 
 ![docker_logo](https://raw.githubusercontent.com/brunocantisano/rpi-nexus/master/files/docker.png)![docker_nexus_logo](https://raw.githubusercontent.com/brunocantisano/rpi-nexus/master/files/logo-nexus.png)![docker_paperinik_logo](https://raw.githubusercontent.com/brunocantisano/rpi-nexus/master/files/docker_paperinik_120x120.png)
 
-This Docker container implements nexus on Raspberry pi.
+This Docker container implements Sonatype Nexus on Raspberry pi.
 
  * Raspbian base image: [resin/rpi-raspbian](https://hub.docker.com/r/resin/rpi-raspbian/)
- * Nexus Repository Manager OSS 3.xx
+ * Nexus Repository Manager OSS 3.0.1-01
  
 ### Installation from [Docker registry hub](https://registry.hub.docker.com/u/paperinik/rpi-nexus/).
 
@@ -22,5 +22,5 @@ Use cases
 
 1) Run a container with a binded data directory:
 ```bash
-docker run -d -p 8081:8081 --name nexus --restart=always -v /media/usbraid/docker/nexus-data:/opt/sonatype/nexus paperinik/rpi-nexus
+docker run -d -p 9404:8081 --name nexus --restart=always -v /media/usbraid/docker/nexus-data:/opt/sonatype/nexus paperinik/rpi-nexus
 ```
