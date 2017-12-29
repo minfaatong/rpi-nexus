@@ -21,7 +21,9 @@ RUN cd /tmp \
 
 COPY files/nexus.vmoptions /usr/local/nexus/bin/nexus.vmoptions
 
-EXPOSE 8081
+#docker-group: 8082
+#docker-private 8083 
+EXPOSE 8081 8082 8083
 
 VOLUME /usr/local/nexus/data
 
