@@ -4,13 +4,13 @@ MAINTAINER Bruno Cardoso Cantisano <bruno.cantisano@gmail.com>
 LABEL version latest
 LABEL description Sonatype Nexus Repository Container
 
-ENV NEXUS_VERSION 3.0.1-01
+ENV NEXUS_VERSION 3.7.0-04
 
 RUN cd /tmp \
     && apt-get clean \
     && apt-get update \
     && apt-get install -y wget \
-    && wget -O /tmp/nexus-${NEXUS_VERSION}-unix.tar.gz https://sonatype-download.global.ssl.fastly.net/nexus/3/nexus-${NEXUS_VERSION}-unix.tar.gz \
+    && wget -O /tmp/nexus-${NEXUS_VERSION}-unix.tar.gz https://download.sonatype.com/nexus/3/nexus-${NEXUS_VERSION}-unix.tar.gz \
     && tar -zxf /tmp/nexus-${NEXUS_VERSION}-unix.tar.gz -C /usr/local \
     && mv /usr/local/nexus-${NEXUS_VERSION}* /usr/local/nexus \
     && rm -f /tmp/nexus-${NEXUS_VERSION}-unix.tar.gz \
