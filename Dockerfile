@@ -4,7 +4,7 @@ MAINTAINER Bruno Cardoso Cantisano <bruno.cantisano@gmail.com>
 LABEL version latest
 LABEL description Sonatype Nexus Repository Container
 
-ENV NEXUS_VERSION 3.0.1-01
+ENV NEXUS_VERSION 3.7.0-04
 
 RUN cd /tmp \
     && apt-get clean \
